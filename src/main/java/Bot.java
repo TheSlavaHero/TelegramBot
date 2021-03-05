@@ -9,11 +9,8 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         Commands.setUpdate(update);
-        SendMessage[] messages = Commands.checkForCommand(update.getMessage().getText()).getFirst();
-        SendAnimation animation = Commands.checkForCommand(update.getMessage().getText()).getSecond();
-
+        SendMessage[] messages = Commands.checkForCommand(update.getMessage().getText());
         try {
-            if (animation != null) {execute(animation);}
             for (SendMessage message : messages) {
                 execute(message);
                 Thread.sleep(1500);
